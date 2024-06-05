@@ -1,0 +1,399 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>DOCOVA</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="{% static 'css/sb-admin-2.min.css' %}" rel="stylesheet">
+    
+    <style>
+        .container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 50px;
+            max-width: 700px;
+        }
+        .bg-gradient-primary {
+            background: linear-gradient(135deg, #c1ff72 10%, #00BF63 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        /* Global styles */
+        body {
+            background: linear-gradient(135deg, #c1ff72 10%, #00BF63 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        h1 {
+            color: #c1ff72;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* Page wrapper styles */
+        #wrapper {
+            overflow-x: hidden;
+        }
+
+        /* Content wrapper styles */
+        #content-wrapper {
+            min-height: 100vh;
+            background-color: #343a40;
+            padding: 80px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Main content styles */
+        #content {
+            padding-top: 20px;
+        }
+
+        /* Page heading styles */
+        .page-heading {
+            color: #c1ff72;
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Search bar styles */
+        .search-bar {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .search-bar input[type="text"] {
+            border-radius: 25px;
+            border: 2px solid #c1ff72;
+            padding: 12px 20px;
+            font-size: 16px;
+            color: #c1ff72;
+            transition: border-color 0.3s ease;
+            width: 70%;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .search-bar input[type="text"]:focus {
+            border-color: #c1ff72;
+        }
+
+        .search-bar button[type="button"] {
+            border-radius: 25px;
+            padding: 12px 24px;
+            font-size: 16px;
+            background-color: #c1ff72;
+            color: #343a40;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-left: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .search-bar button[type="button"]:hover {
+            background-color: #c1ff72;
+        }
+
+        /* Products table styles */
+        .products-table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .products-table th,
+        .products-table td {
+            border: 1px solid #c1ff72 ;
+            padding: 5px;
+            text-align: left;
+            vertical-align: middle;
+        }
+
+        .products-table th {
+            background-color: #c1ff72;
+            color: #343a40;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .products-table tbody tr {
+            transition: background-color 0.3s ease;
+        }
+
+        .products-table tbody tr:hover {
+            background-color:#c1ff72;
+        }
+
+        .products-table .accion-btn {
+            padding: 10px 20px;
+            font-size: 15px;
+            line-height: 1.5;
+            border-radius: 20px;
+            transition: background-color 0.3s ease;
+            background-color: #00BF63;
+            border-color: #009688;
+            color: #343a40;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .products-table .accion-btn:hover {
+            background-color: #c1ff72;
+            border-color: #00BF63 ;
+        }
+
+        /* Cart section styles */
+        .cart-section {
+            max-width: 10px;
+            margin-top: 20px;
+        }
+
+        /* Navigation buttons styles */
+        .navigation-buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .navigation-buttons a {
+            margin: 5px;
+            border-radius: 25px;
+            padding: 12px 24px;
+            font-size: 16px;
+            background-color: #c1ff72 ;
+            color: #343a40;
+            border: none;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .navigation-buttons a:hover {
+            background-color: #00BF63;
+        }
+
+        .navigation-buttons .btn-secondary {
+            background-color: #81c784;
+        }
+
+        .navigation-buttons .btn-secondary:hover {
+            background-color: #388e3c;
+        }
+
+        /* Additional styles */
+        .rounded {
+            border-radius: 50%;
+        }
+
+        .shadow {
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+        }
+
+        .mi_scroll {
+            overflow-x: auto;
+        }
+
+        /* Custom styles for table images */
+        .product-image {
+            width: 80px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .product-image:hover {
+            transform: scale(1.1);
+        }
+
+        .card-header {
+            text-align: center;
+            font-size: 1.2rem;
+            background: linear-gradient(45deg, #c1ff72 , #00BF63);
+            color: #343a40;
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-4 text-gray-800 page-heading">Bienvenido, {{ username }} ({{ nombre_estudiante }})</h1>
+
+                    <!-- Search Bar -->
+                    <div class="search-bar">
+                        <input type="text" class="form-control" placeholder="Buscar producto por nombre" id="searchInput">
+                        <button class="btn btn-primary" type="button" id="searchButton">Buscar</button>
+
+                    </div>
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-danger" role="alert">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    
+                    <hr>
+                    <hr>
+<!-- Botones de navegación -->
+<div class="navigation-buttons">
+    <a href="{% url 'login' %}" class="btn btn-danger">Salir</a>
+    <a href="{% url 'formulario_alergias' %}" class="btn btn-secondary">Formulario de alimentos no permitidos</a>
+    <a href="{% url 'pagina_estudiante' %}" class="btn btn-secondary">Volver</a>
+    
+</div>
+                    <hr>
+                    <hr>
+
+
+                    <div class="row">
+                        <!-- Products Table -->
+                        <div class="col-md-9">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Productos Disponibles</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered products-table" id="dataTable" width="100%" cellspacing="0">
+                                            <thead>
+                                                <tr>
+                                                    <th>Código</th>
+                                                    <th>Nombre</th>
+                                                    <th>Valor</th>
+                                                    <th>Cantidad</th>
+                                                    <th>Imagen</th>
+                                                    <th>Acción</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for producto in productos %}
+                                                <tr>
+                                                    <td>{{ producto.codigo }}</td>
+                                                    <td>{{ producto.nombre }}</td>
+                                                    <td>{{ producto.valor }}</td>
+                                                    <td>{{ producto.cantidad }}</td>
+                                                    <td>
+                                                        <div class="mi_scroll">
+                                                            {% if producto.imagen %}
+                                                                <img src="{{ producto.imagen.url }}" class="product-image" />
+                                                            {% else %}
+                                                                <p>No image available</p> <!-- o puedes usar una imagen de marcador de posición -->
+                                                            {% endif %}
+                                                        </div>
+                                                    </td>
+                                                    
+                                                    <td>
+                                                        <a href="{% url 'Add' producto.id %}" class="btn btn-primary accion-btn">Agregar al carrito</a>
+                                                    </td>
+                                                </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Cart Section -->
+                        <div class="col-md-3">
+                            <div class="carrito">
+                                {% include "carrito.html" %}
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+        
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="{% static 'js/sb-admin-2.min.js' %}"></script>
+
+    <!-- Custom script for search functionality -->
+    <script>
+        $(document).ready(function () {
+            $("#searchButton").click(function () {
+                var searchText = $("#searchInput").val().toLowerCase();
+                $("tbody tr").each(function () {
+                    var found = false;
+                    $(this).each(function () {
+                        if ($(this).text().toLowerCase().indexOf(searchText) >= 0) {
+                            found = true;
+                            return false;
+                        }
+                    });
+                    if (!found) {
+                        $(this).hide();
+                    } else {
+                        $(this).show();
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>
+
+

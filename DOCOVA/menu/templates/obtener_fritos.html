@@ -1,0 +1,271 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOCOVA</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .btn-custom-edit {
+            background-color: #00BF63; /* Verde */
+            color: white;
+        }
+        .btn-custom-delete {
+            background-color: #00BF63; /* Rojo */
+            color: white;
+        }
+        .btn-custom-edit:hover,
+        .btn-custom-delete:hover {
+            opacity: 0.8;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #c1ff72;
+            color: #343a40;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #e2ffe2;
+        }
+        .sidebar {
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            background-color: #343a40;
+            color: white;
+            overflow-y: auto;
+        }
+        .content {
+            margin-left: 270px;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        .sidebar .nav-item .nav-link {
+            color: white;
+        }
+        .sidebar .nav-item .nav-link img {
+            margin-right: 10px;
+        }
+        .img-profile {
+            width: 100px; /* Ajusta el tamaño de la imagen */
+            height: auto;
+        }
+        .rounded-circle {
+            border-radius: 80%;
+        }
+        .table-actions {
+            display: flex;
+            gap: 10px;
+        }
+        .table-img {
+            display: block;
+            margin: 0 auto;
+            width: 100px; /* Ajusta el tamaño de la imagen */
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .modal-header {
+            background-color: #00BF63;
+            color: white;
+        }
+        .modal-footer .btn-secondary {
+            background-color: #ccc;
+        }
+    </style>
+    <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="row no-gutters">
+        <div class="col-lg-3 sidebar bg-gradient-primary sidebar-dark accordion" id="accordionSidebar">
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                <a class="nav-link dropdown-toggle" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <center><img class="img-profile rounded-circle" src="{% static 'img/logo.PNG' %}" alt="Logo"></center>
+                </a>
+            </a>
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'index_view' %}">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Inicio</span>
+                </a>
+            </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{% url 'obtener_bebidas' %}" aria-expanded="true" aria-controls="collapseTwo">
+                    <img src="{% static 'img/bebidas.png' %}" style="width: 24px; height: 24px;" alt="Icono de Bebidas">
+                    <span>Bebidas</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{% url 'obtener_fritos' %}" aria-expanded="true" aria-controls="collapseTwo">
+                    <img src="{% static 'img/frito.png' %}" style="width: 24px; height: 24px;" alt="Icono de Alimentos fritos">
+                    <span>Alimentos fritos</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{% url 'obtener_empaque' %}" aria-expanded="true" aria-controls="collapseTwo">
+                    <img src="{% static 'img/paquete.png' %}" style="width: 24px; height: 24px;" alt="Icono de Alimentos empaquetados">
+                    <span>Alimentos empaquetados</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{% url 'obtener_desayuno' %}" aria-expanded="true" aria-controls="collapseTwo">
+                    <img src="{% static 'img/desayuno.png' %}" style="width: 24px; height: 24px;" alt="Icono de Desayuno">
+                    <span>Desayuno</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{% url 'obtener_almuerzo' %}" aria-expanded="true" aria-controls="collapseTwo">
+                    <img src="{% static 'img/almuerzo.png' %}" style="width: 24px; height: 24px;" alt="Icono de Almuerzo">
+                    <span>Almuerzo</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{% url 'obtener_postre' %}" aria-expanded="true" aria-controls="collapseTwo">
+                    <img src="{% static 'img/postre.png' %}" style="width: 24px; height: 24px;" alt="Icono de Postres">
+                    <span>Postres</span>
+                </a>
+            </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+        </div>
+        <div class="col-lg-9 content">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Disponibilidad</th>
+                        <th scope="col">Categoría</th>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">Precio</th>
+                        <th scope="col">Imagen</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for frito in fritos %}
+                    <tr id="fila-{{ frito.id }}">
+                        <td>{{ frito.nombre }}</td>
+                        <td>{{ frito.disponibilidad }}</td>
+                        <td>{{ frito.categoria }}</td>
+                        <td>{{ frito.cantidad }}</td>
+                        <td>{{ frito.valor }}</td>
+                        <td>
+                            {% if frito.imagen %}
+                                <img src="{{ frito.imagen.url }}" class="table-img" alt="{{ frito.nombre }}">
+                            {% else %}
+                                <p>No image available</p>
+                            {% endif %}
+                        </td>
+                        <td class="table-actions">
+                            <button class="btn btn-custom-edit" data-toggle="modal" data-target="#editarModal{{ frito.id }}">Editar</button>
+                            <button class="btn btn-custom-delete" data-toggle="modal" data-target="#confirmarEliminar{{ frito.id }}">Eliminar</button>
+                        </td>
+                    </tr>
+                    <!-- Modal para editar frito -->
+                    <div class="modal fade" id="editarModal{{ frito.id }}" tabindex="-1" role="dialog" aria-labelledby="editarModalLabel{{ frito.id }}" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="editarModalLabel{{ frito.id }}">Editar {{ frito.nombre }}</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="{% url 'actualizar_frito' %}" method="post" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="frito_id" value="{{ frito.id }}">
+                                        <div class="form-group">
+                                            <label for="nombre">Nombre:</label>
+                                            <input type="text" class="form-control" id="nombre" name="nombre" value="{{ frito.nombre }}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="disponibilidad">Disponibilidad:</label>
+                                            <input type="checkbox" class="form-control" id="disponibilidad" name="disponibilidad" {% if frito.disponibilidad %} checked {% endif %}>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="cantidad">Cantidad:</label>
+                                            <input type="number" class="form-control" id="cantidad" name="cantidad" value="{{ frito.cantidad }}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="valor">Precio:</label>
+                                            <input type="text" class="form-control" id="valor" name="valor" value="{{ frito.valor }}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="imagen">Imagen:</label>
+                                            <input type="file" class="form-control-file" id="imagen" name="imagen">
+                                        </div>
+                                        <button type="submit" class="btn btn-custom-edit">Guardar cambios</button>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Modal para confirmar eliminación -->
+                    <div class="modal fade" id="confirmarEliminar{{ frito.id }}" tabindex="-1" role="dialog" aria-labelledby="confirmarEliminarLabel{{ frito.id }}" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="confirmarEliminarLabel{{ frito.id }}">Confirmar eliminación</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    ¿Estás seguro de que quieres eliminar {{ frito.nombre }}?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                    <a href="{% url 'eliminar_frito' frito.id %}" class="btn btn-custom-delete">Eliminar</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <a href="{% url 'index_view' %}" class="btn btn-custom-edit">Regresar al Inicio</a>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS y jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function confirmarEliminacion(url) {
+            if (confirm("¿Estás seguro de que quieres eliminar este alimento frito?")) {
+                window.location.href = url; // Redirigir a la URL de eliminación si se confirma
+            }
+        }
+    </script>
+</body>
+</html>

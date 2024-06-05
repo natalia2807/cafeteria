@@ -1,0 +1,160 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>DOCOVA</title>
+
+    <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="{% static 'css/sb-admin-2.min.css' %}" rel="stylesheet">
+
+    <style>
+        .bg-gradient-primary {
+            background: linear-gradient(135deg, #c1ff72 10%, #00BF63 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .background-rectangle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 900px;
+            height: 500px;
+            background: #ffffff33;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .card {
+            position: relative;
+            z-index: 2;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .bg-login-image {
+            background: url('{% static 'img/logo.PNG' %}');
+            background-position: center;
+            background-size: cover;
+            border-radius: 20px 0 0 20px;
+        }
+
+        .form-control-user {
+            border-radius: 10px;
+        }
+
+        .btn-user {
+            border-radius: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-user:hover {
+            background-color: #c1ff72;
+        }
+
+        .text-gray-900 {
+            color: #3a3a3a;
+        }
+    </style>
+
+</head>
+
+<body class="bg-gradient-primary">
+
+    <div class="background-rectangle"></div>
+
+    <div class="container">
+
+        <div class="row justify-content-center">
+
+            <div class="col-xl-10 col-lg-12 col-md-9">
+
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <div class="row">
+                            <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                            <div class="col-lg-6">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4">¡Bienvenido de Nuevo!</h1>
+                                    </div>
+                                    <form class="user" method="post">
+                                        {% csrf_token %}
+                                        {% if error_message %}
+                                            <p class="text-danger">{{ error_message }}</p>
+                                        {% endif %}
+                                        <div class="form-group">
+                                            <input type="text" class="form-control form-control-user"
+                                                id="exampleInputEmail" aria-describedby="emailHelp"
+                                                placeholder="Nombre de Usuario" name="username">
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <input type="password" class="form-control form-control-user" id="exampleInputPassword"
+                                                    placeholder="Contraseña" name="password">
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                                        <i class="fas fa-eye"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary btn-user btn-block">
+                                            Iniciar Sesión
+                                        </button>
+                                        <hr>
+                                    </form>
+                                    <hr>
+                                    
+                                
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="{% static 'js/sb-admin-2.min.js' %}"></script>
+
+    <script>
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            const passwordInput = document.getElementById('exampleInputPassword');
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            this.querySelector('i').classList.toggle('fa-eye-slash');
+        });
+    </script>
+
+</body>
+
+</html>

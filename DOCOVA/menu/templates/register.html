@@ -1,0 +1,211 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>DOCOVA</title>
+
+    <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="{% static 'css/sb-admin-2.min.css' %}" rel="stylesheet">
+    <style>
+        .custom-table {
+            border-collapse: separate;
+            border-spacing: 0 15px;
+            width: 100%;
+            margin: 20px 0;
+        }
+        .custom-table thead {
+            background-color: #c1ff72;
+            color: white;
+        }
+        .custom-table th, .custom-table td {
+            padding: 12px;
+            text-align: left;
+        }
+        .custom-table th {
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+        .custom-table tbody tr {
+            background-color: #f9f9f9;
+            transition: background-color 0.3s;
+        }
+        .custom-table tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+        .custom-table tbody tr td:first-child {
+            border-bottom-left-radius: 15px;
+            border-top-left-radius: 15px;
+        }
+        .custom-table tbody tr td:last-child {
+            border-bottom-right-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+        .custom-table tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+    <style>
+        .container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            max-width: 600px;
+        }
+        .bg-gradient-primary {
+            background: linear-gradient(135deg, #c1ff72 10%, #00BF63 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        body {
+            background: linear-gradient(135deg, #c1ff72 10%, #00BF63 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        h1 {
+            color: #c1ff72;
+            font-weight: 700;
+            text-align: center;
+        }
+        .form-control {
+            border: 1px solid #d1d3e2;
+            border-radius: 10px;
+            padding: 10px;
+            transition: border-color 0.3s;
+        }
+        .btn-custom {
+            background-color: #00BF63;
+            color: #fff;
+            border: 2px solid #00BF63;
+            border-radius: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+    
+        .btn-custom:hover {
+            background-color: #fff;
+            color: #00BF63;
+            transition: all 0.3s ease;
+        }
+    
+        .btn-custom-alt {
+            background-color: #c1ff72;
+            color: #fff;
+            border: 2px solid #c1ff72;
+            border-radius: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            margin-left: 10px;
+            transition: all 0.3s ease;
+        }
+    
+        .btn-custom-alt:hover {
+            background-color: #fff;
+            color: #00BF63;
+            transition: all 0.3s ease;
+        }
+    </style>
+    <script>
+        // Función para mostrar la ventana emergente
+        function mostrarVentanaEmergente() {
+            alert("Producto guardado exitosamente");
+        }
+
+        // Inicializar selectores de fecha
+        $(document).ready(function() {
+            $('.datepicker').datepicker({
+                format: 'yyyy-mm-dd',
+                autoclose: true,
+                todayHighlight: true
+            });
+        });
+    </script>
+
+</head>
+
+<body class="bg-gradient-primary">
+
+    <div class="background-rectangle"></div>
+
+    <div class="container">
+
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card-body p-0">
+                <!-- Nested Row within Card Body -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="p-5">
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4">Agregar un nuevo usuario en el Administrador</h1>
+                            </div>
+                            <form class="user" method="post">
+                                {% csrf_token %}
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="text" class="form-control form-control-user" id="exampleFirstName"
+                                               placeholder="Nombre" name="first_name">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control form-control-user" id="exampleLastName"
+                                               placeholder="Apellido" name="last_name">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" class="form-control form-control-user" id="exampleInputEmail"
+                                           placeholder="Email " name="email">
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="password" class="form-control form-control-user"
+                                               id="exampleInputPassword" placeholder="Contraseña" name="password">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="password" class="form-control form-control-user"
+                                               id="exampleRepeatPassword" placeholder="Repetir contraseña" name="password_confirm">
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-user btn-block">Registrar</button>
+                                <hr>
+                                <a href="{% url 'index_view' %}" class="btn btn-block-custom btn-user btn-block">Regresar al Inicio</a>
+                            </form>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="{% static 'js/sb-admin-2.min.js' %}"></script>
+
+</body>
+
+</html>
+

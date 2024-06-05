@@ -1,0 +1,46 @@
+<div >
+  <table class="table table-bordered" style="background-color: lightgray;">
+      <thead>
+          <tr>
+              <th scope="row" colspan="4" class="text-center">CARRITO</th>
+          </tr>
+          <center>
+              <tr>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Cantidad</th>
+              </tr>
+          </center>
+      </thead>
+      <tbody>
+          {% if request.session.carrito.items %}
+          {% for key, value in request.session.carrito.items %}
+          <tr>
+              <td>{{ value.nombre }}</td>
+              <td>{{ value.cantidad }}
+                  <a href="{% url 'Add' value.producto_id %}" class="badge btn btn-dark badge-dark">+</a>
+                  <a href="{% url 'Sub' value.producto_id %}" class="badge btn btn-dark badge-dark">-</a>
+              </td>
+          </tr>
+          {% endfor %}
+          {% else %}
+          <tr>
+              <td colspan="3">
+                  <div class="alert alert-danger text-center"> Sin Productos </div>
+              </td>
+          </tr>
+          {% endif %}
+          <tr>
+              <th scope="row">Total:</th>
+              <td colspan="3">$ {{ total_carrito }}</td>
+          </tr>
+      </tbody>
+  </table>
+  <hr>
+</div>
+<div class="row text-center">
+  <div class="col-6"><a href="{% url 'CLS' %}" class="btn btn-danger">Limpiar</a></div>
+  <form method="post" action="{% url 'comprar' %}">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-success">Comprar</button>
+  </form>
+</div>

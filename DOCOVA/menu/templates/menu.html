@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WEB-Docova</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  
+  <style>
+    body {
+      background-color: black;
+      color: white;
+    }
+    .header {
+      background-color: #343a40;
+      color: white;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .header img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: rgb(146, 248, 122);
+      margin-left: auto;
+    }
+    .sidebar {
+      background-color: #343a40;
+      color: rgb(12, 12, 12);
+      width: 200px;
+      height: 100vh;
+      position: fixed;
+      left: 0;
+      top: 60px;
+    }
+    .list-group-item {
+      background-color: rgb(51, 224, 224);
+      color: rgb(21, 19, 19);
+      padding: 8px 10px;
+      margin-bottom: 2px;
+      border-radius: 5px;
+    }
+    .list-group-item img {
+      width: 20px;
+      height: 20px;
+      margin-right: 25px;
+    }
+    .list-group-item:hover {
+      background-color: rgb(59, 186, 224);
+    }
+    .content {
+      margin-left: 200px;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>WEB-Docova</h1>
+    <img src="../../static/img/carrito.png" alt="Carrito">
+  </div>
+  <div class="sidebar">
+    <div class="list-group">
+      <a href="{% url 'obtener_bebidas' %}" class="list-group-item list-group-item-action">
+          <img src="../../static/img/bebidas.png" alt="Bebidas"> Bebidas
+      </a>
+      <a href="#" class="list-group-item list-group-item-action">
+          <img src="../../static/img/alimentos-fritos.png" alt="Alimentos fritos"> Alimentos fritos
+      </a>
+      <a href="#" class="list-group-item list-group-item-action">
+          <img src="../../static/img/alimentos-empaquetados.png" alt="Alimentos empaquetados"> Alimentos empaquetados
+      </a>
+      <a href="#" class="list-group-item list-group-item-action">
+          <img src="../../static/img/desayuno.png" alt="Desayuno"> Desayuno
+      </a>
+      <a href="#" class="list-group-item list-group-item-action">
+          <img src="../../static/img/almuerzo.png" alt="Almuerzo"> Almuerzo
+      </a>
+      <a href="#" class="list-group-item list-group-item-action">
+          <img src="../../static/img/postres.png" alt="Postres"> Postres
+      </a>
+      <a href="#" class="list-group-item list-group-item-action">Chat</a>
+      <a href="#" class="list-group-item list-group-item-action">Pedidos</a>
+      <a href="{% url 'agregar_producto' %}" class="list-group-item list-group-item-action">Agregar producto</a>
+    </div>
+  </div>
+  <div class="content">
+    <!-- Aquí puedes agregar más contenido -->
+  </div>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

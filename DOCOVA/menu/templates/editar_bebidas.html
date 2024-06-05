@@ -1,0 +1,24 @@
+<div class="modal-body">
+    <!-- Aquí van los campos para editar la bebida -->
+    <form id="editarBebidaForm">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre:</label>
+            <input type="text" class="form-control" id="nombre" name="nombre">
+        </div>
+        <div class="mb-3">
+            <label for="cantidad" class="form-label">Cantidad:</label>
+            <input type="number" class="form-control" id="cantidad" name="cantidad">
+        </div>
+        <div class="mb-3">
+            <label for="valor" class="form-label">Valor:</label>
+            <input type="number" class="form-control" id="valor" name="valor">
+        </div>
+        <div class="mb-3">
+            <label for="categoria" class="form-label">Categoría:</label>
+            <input type="text" class="form-control" id="categoria" name="categoria">
+        </div>
+        <!-- Agregar campo oculto para el ID de la bebida -->
+        <input type="hidden" id="bebida_id" name="bebida_id">
+    </form>
+</div>

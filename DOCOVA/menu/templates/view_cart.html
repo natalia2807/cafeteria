@@ -1,0 +1,36 @@
+<!-- En tu archivo view_cart.html -->
+
+{% extends 'pagina_estudiante.html' %}
+{% block content %}
+<h1>Carrito de Compras</h1>
+
+{% if productos_en_carrito %}
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for producto in productos_en_carrito %}
+            <tr>
+                <td>{{ producto.nombre }}</td>
+                <td>{{ producto.precio }}</td>
+                <td>{{ producto.cantidad }}</td>
+                <td>{{ producto.precio * producto.cantidad }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<p>No hay productos en tu carrito.</p>
+{% endif %}
+
+<a href="{% url 'checkout' %}" class="btn btn-primary">Realizar Pedido</a>
+
+{% endblock %}

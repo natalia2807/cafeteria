@@ -1,0 +1,87 @@
+<div id="editModal" class="modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Editar Bebida</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Formulario para editar la bebida -->
+                <form id="editForm" method="post" action="{% url 'editar_bebida' %}">
+                    {% csrf_token %}
+                    <!-- Campos para editar los datos de la bebida -->
+                    <input type="hidden" id="bebida_id" name="bebida_id" value="">
+                    <div class="form-group">
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" value="">
+                    </div>
+                    <div class="form-group">
+                        <label for="cantidad">Cantidad:</label>
+                        <input type="text" class="form-control" id="cantidad" name="cantidad" value="">
+                    </div>
+                    <div class="form-group">
+                        <label for="valor">Valor:</label>
+                        <input type="text" class="form-control" id="valor" name="valor" value="">
+                    </div>
+                    <div class="form-group">
+                        <label for="categoria">Categoría:</label>
+                        <input type="text" class="form-control" id="categoria" name="categoria" value="">
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <!-- Botón para guardar los cambios -->
+                <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Función para abrir el modal y cargar los datos de la bebida seleccionada
+    function openEditModal(id) {
+        // Realizar una petición AJAX para obtener los datos de la bebida
+        fetch('/menu/obtener_bebidas/') // Ajustar la URL de la petición según tu configuración
+            .then(response => response.json())
+            .then(data => {
+                // Buscar la bebida correspondiente en los datos recibidos
+                const bebida = data.find(item => item.id === id);
+                if (bebida) {
+                    // Rellenar los campos del formulario con los datos de la bebida encontrada
+                    document.getElementById('bebida_id').value = bebida.id;
+                    document.getElementById('nombre').value = bebida.nombre;
+                    document.getElementById('cantidad').value = bebida.cantidad;
+                    document.getElementById('valor').value = bebida.valor;
+                    document.getElementById('categoria').value = bebida.categoria;
+                    // Mostrar el modal
+                    $('#editModal').modal('show');
+                } else {
+                    console.error('Bebida no encontrada');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    }
+
+    // Agregar un evento 'submit' al formulario de edición
+    document.getElementById('editForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Evitar el envío del formulario por defecto
+        // Crear un objeto FormData para enviar los datos del formulario
+        const formData = new FormData(this);
+        // Realizar una petición AJAX para guardar los cambios
+        fetch('/menu/editar_bebida/', { // Ajustar la URL de la petición según tu configuración
+            method: 'POST',
+            body: formData // Adjuntar los datos del formulario a la petición
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Cerrar el modal después de guardar los cambios
+            $('#editModal').modal('hide');
+            // Recargar la página para reflejar los cambios en la tabla de bebidas
+            location.reload();
+        })
+        .catch(error => console.error('Error:', error));
+    });
+</script>

@@ -1,0 +1,109 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Estudiante</title>
+    <!-- Bootstrap CSS -->
+    <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <!-- Custom styles for this template-->
+    <link href="{% static 'css/sb-admin-2.min.css' %}" rel="stylesheet">
+    <style>
+         .bg-gradient-primary {
+            background: linear-gradient(135deg, #c1ff72 10%, #00BF63 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        body {
+            background: linear-gradient(135deg, #c1ff72 10%, #00BF63 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            max-width: 600px;
+        }
+        h2 {
+            color: #c1ff72;
+            font-weight: 700;
+            text-align: center;
+        }
+        .form-group label {
+            font-weight: 600;
+            color: #00BF63;
+        }
+        .form-control {
+            border: 1px solid #d1d3e2;
+            border-radius: 10px;
+            padding: 10px;
+            transition: border-color 0.3s;
+        }
+        .form-control:focus {
+            border-color: #00BF63;
+            box-shadow: 0 0 5px #00BF63;
+        }
+        .btn-primary {
+            background-color: #c1ff72;
+            border: none;
+            border-radius: 10px;
+            padding: 10px 20px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #c1ff72;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h2 class="mb-4">Agregar Estudiante</h2>
+        <form method="post" action="{% url 'agregar_estudiante' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="tipo_usuario">Tipo de Usuario</label>
+                <select class="form-control" id="tipo_usuario" name="tipo_usuario">
+                    <option value="estudiante">Estudiante</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="cedula_estudiante">Numero de identificación del Estudiante</label>
+                <input type="text" class="form-control" id="cedula_estudiante" name="cedula_estudiante" placeholder="Numero de identificación del Estudiante">
+            </div>
+            <div class="form-group">
+                <label for="nombre">Nombre del Estudiante</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre del Estudiante">
+            </div>
+            <div class="form-group">
+                <label for="correoEstudiante">Correo Electrónico del Estudiante</label>
+                <input type="email" class="form-control" id="correoEstudiante" name="correoEstudiante" placeholder="Correo Electrónico del Estudiante">
+            </div>
+            <div class="form-group">
+                <label for="correoAcudiente">Correo Electrónico del Acudiente</label>
+                <input type="email" class="form-control" id="correoAcudiente" name="correoAcudiente" placeholder="Correo Electrónico del Acudiente">
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Agregar Estudiante</button>
+            <a href="{% url 'index_view' %}" class="btn btn-primary btn-block">Regresar al Inicio</a>
+        </form>
+    </div>
+    <!-- Bootstrap JS -->
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="{% static 'js/sb-admin-2.min.js' %}"></script>
+</body>
+
+</html>

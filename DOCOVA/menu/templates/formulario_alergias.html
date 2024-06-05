@@ -1,0 +1,165 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOCOVA</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #c1ff72 10%, #00BF63 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            max-width: 600px;
+            margin: 40px auto;
+            transition: transform 0.3s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+        }
+
+        h2 {
+            color: #D39F67;
+            text-align: center;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            color: #495057;
+            font-weight: serif;
+        }
+
+        .form-control {
+            border: 2px solid #c1ff72;
+            border-radius: 15px;
+            padding: 12px;
+            font-size: 16px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: #00BF63;
+            box-shadow: 0 0 5px rgba(0, 91, 187, 0.5);
+        }
+
+        .btn-primary {
+            background-color: #c1ff72;
+            border-color: #00BF63;
+            border-radius: 15px;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #00BF63;
+            border-color: #00BF63;
+            transform: translateY(-2px);
+        }
+
+        .form-group textarea {
+            resize: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h2 class="mb-4">Formulario de alimentos no permitidos</h2>
+        <form method="post" action="{% url 'guardar_alergias' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="cedula">Cédula del Estudiante (Username)</label>
+                <input type="text" class="form-control" id="cedula" name="cedula" value="{{ username }}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="nombre">Nombre del Estudiante</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" value="{{ nombre }}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="correo">Correo Electrónico del Estudiante</label>
+                <input type="email" class="form-control" id="correo" name="correo" value="{{ correo }}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="categoria">Categoría de Producto</label>
+                <select class="form-control" id="categoria" name="categoria">
+                    <option value="">Seleccione una categoría</option>
+                    {% for categoria in categorias %}
+                        <option value="{{ categoria.0 }}">{{ categoria.1 }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="producto">Producto</label>
+                <select class="form-control" id="producto" name="producto" multiple>
+                    <option value="">Seleccione un producto</option>
+                    {% for producto in productos %}
+                        <option value="{{ producto.id }}" data-categoria="{{ producto.categoria }}">{{ producto.nombre }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <center>
+            <hr>
+            <button type="submit" class="btn btn-primary">Enviar</button>
+            <a href="{% url 'pagina_estudiante' %}" class="btn btn-primary">Volver</a>
+            <hr>
+        </center> 
+            <div class="form-group">
+                <label for="alergias">Alergias Alimenticias</label>
+                <textarea class="form-control" id="alergias" name="alergias" rows="3" placeholder="Ingrese las alergias alimenticias"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="restricciones">Restricciones de Comida</label>
+                <textarea class="form-control" id="restricciones" name="restricciones" rows="3" placeholder="Ingrese las restricciones de comida"></textarea>
+            </div>
+           
+        </form>
+    </div>
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const categoriaSelect = document.getElementById('categoria');
+            const productoSelect = document.getElementById('producto');
+            
+            // Almacena todas las opciones de producto
+            const allProductos = productoSelect.innerHTML;
+    
+            categoriaSelect.addEventListener('change', function () {
+                const categoria = this.value;
+                // Restablece las opciones de producto
+                productoSelect.innerHTML = allProductos;
+                
+                // Oculta las opciones que no corresponden a la categoría seleccionada
+                Array.from(productoSelect.options).forEach(producto => {
+                    if (producto.dataset.categoria !== categoria && categoria !== '') {
+                        producto.style.display = 'none';
+                    } else {
+                        producto.style.display = 'block';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

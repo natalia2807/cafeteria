@@ -1,0 +1,135 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOCOVA-Factura</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #c1ff72 10%, #00BF63 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .invoice-container {
+            background: white;
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 800px;
+            margin: auto;
+            border-top: 8px solid #00BF63 ;
+            border-bottom: 8px solid #00BF63 ;
+            transition: transform 0.3s ease-in-out;
+        }
+        .invoice-container:hover {
+            transform: scale(1.02);
+        }
+        h1 {
+            text-align: center;
+            color: #D39F67;
+            margin-bottom: 20px;
+            font-size: 2.5em;
+        }
+        p {
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 2px solid #c1ff72;
+        }
+        th {
+            background-color: #c1ff72;
+            color: white;
+            font-size: 1em;
+            text-transform: uppercase;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #ffe5d9;
+        }
+        .total {
+            font-size: 1.5em;
+            text-align: right;
+            margin-top: 20px;
+            color: #00BF63;
+            font-weight: bold;
+        }
+        .btn-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .btn-primary {
+            display: inline-block;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            color: white;
+            background-color: #00BF63;
+            border: none;
+            border-radius: 50px;
+            text-align: center;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #00BF63;
+        }
+    </style>
+</head>
+<body>
+    <div class="invoice-container">
+        <h1>Factura de Compra</h1>
+        <p>Estudiante: {{ nombre_estudiante }} (Cédula: {{ cedula_estudiante }})</p>
+    
+        
+        <!-- Sección de restricciones alimenticias -->
+        <h2>Restricciones alimenticias y sus alergias</h2>
+        <ul>
+            {% for restriccion in restricciones %}
+                <li>{{ restriccion.producto.nombre }} - {{ restriccion.restricciones_comida }}</li>
+                <li>{{ restriccion.alergias_alimenticias }}</li>
+            {% empty %}
+                <li>No se encontraron restricciones alimenticias</li>
+            {% endfor %}
+        </ul>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio Unitario</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in productos_comprados %}
+                <tr>
+                    <td>{{ item.producto.nombre }}</td>
+                    <td>{{ item.cantidad }}</td>
+                    <td>{{ item.precio_unitario }}</td>
+                    <td>{{ item.precio_total }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <p class="total">Total: {{ total }}</p>
+        <div class="btn-container">
+            <a href="{% url 'pagina_estudiante' %}" class="btn btn-primary">Volver</a>
+        </div>
+    </div>
+</body>
+</html>
